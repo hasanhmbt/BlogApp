@@ -1,0 +1,33 @@
+﻿@model Subject
+
+@{
+    Layout = "_DashboardLayout";
+    ViewBag.Title = "Subject Details";
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h1 class="m-0 font-weight-bold text-primary">@Model.Name</h1>
+        </div>
+        <div class="card-body">
+            <p><strong>Hours:</strong> @Model.Hours</p>
+            <p><strong>Credits:</strong> @Model.Credits</p>
+            <p>
+                <strong>Materials Link:</strong>
+                @if (!string.IsNullOrEmpty(Model.MaterialsLink))
+                {
+                    <a href="@Model.MaterialsLink" target="_blank">View Materials</a>
+                }
+                else
+                {
+                    @:N/A
+                }
+            </p>
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+﻿@model IEnumerable<Article>
+
+@{
+    ViewData["Title"] = "Articles";
+}
+
+@section Styles {
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #eef2f3, #8e9eab);
+            color: #333;
+        }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: auto;
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .article-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transition: box-shadow 0.3s ease;
+        }
+
+            .article-item:hover {
+                box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+            }
+
+        .article-image img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .article-content {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .article-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .article-excerpt {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .read-more:hover {
+                background-color: #0056b3;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
+
+        @@media (max-width: 768px) {
+            .article-item
+
+        {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .article-content {
+            min-width: unset;
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+        }
+
+        }
+    </style>
+}
+<div class="glass-box">
+<div class="container">
+    <h2>Articles</h2>
+    <div class="articles-list">
+        @foreach (var article in Model)
+        {
+            <div class="article-item">
+                <div class="article-image">
+                    @if (!string.IsNullOrEmpty(article.FilePath))
+                    {
+                        <img src="@article.FilePath" alt="@article.Title" />
+                    }
+                    else
+                    {
+                            <img src="https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png" alt="@article.Title" />
+                    }
+                </div>
+                <div class="article-content">
+                    <div class="article-title">@article.Title</div>
+                    <div class="article-excerpt">
+                        @Html.Raw(article.Description != null && article.Description.Length > 100
+                                 ? article.Description.Substring(0, 100) + "..."
+                                 : article.Description ?? "No Description")
+                    </div>
+                    <a asp-action="Details" asp-route-id="@article.Id" class="read-more">Read More</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</div>

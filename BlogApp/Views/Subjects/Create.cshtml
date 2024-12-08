@@ -1,0 +1,41 @@
+﻿@model Subject
+
+@{
+    Layout = "_DashboardLayout";
+    ViewBag.Title = "Create Subject";
+}
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Hours"></label>
+        <input asp-for="Hours" class="form-control" type="number" />
+        <span asp-validation-for="Hours" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Credits"></label>
+        <input asp-for="Credits" class="form-control" type="number" />
+        <span asp-validation-for="Credits" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MaterialsLink"></label>
+        <input asp-for="MaterialsLink" class="form-control" />
+        <span asp-validation-for="MaterialsLink" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>
+
+@section js {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

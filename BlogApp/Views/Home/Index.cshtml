@@ -1,0 +1,231 @@
+﻿@model HomeViewModel
+
+@section Styles {
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #eef2f3, #8e9eab);
+            color: #333;
+        }
+
+        .container {
+            width: 90%; /* Use a percentage to allow the layout to stretch on larger screens */
+            max-width: 1600px; /* A max-width for extremely large screens */
+            margin: 40px auto; /* Slightly less top margin to bring content closer */
+            padding: 20px;
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px; /* More padding to fill space */
+        }
+
+        .hero-image img {
+            width: 220px; /* Slightly larger image */
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-info {
+            flex: 1;
+        }
+
+            .hero-info h1 {
+                font-size: 2.5rem; /* Slightly larger font for hero title */
+                font-weight: bold;
+                margin-bottom: 10px;
+                color: #333;
+            }
+
+            .hero-info p {
+                margin: 5px 0;
+                color: #555;
+                line-height: 1.5;
+                font-size: 1.1rem; /* Slightly larger text */
+            }
+
+            .hero-info .send-email-button {
+                display: inline-block;
+                margin-top: 15px;
+                padding: 8px 16px;
+                background: #007bff;
+                color: #fff;
+                border-radius: 4px;
+                text-decoration: none;
+                border: 1px solid #0056b3;
+                transition: background-color 0.3s ease, box-shadow 0.3s ease;
+                font-weight: bold;
+            }
+
+                .hero-info .send-email-button:hover {
+                    background-color: #0056b3;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                }
+
+        .latest-articles-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+            .latest-articles-section h2 {
+                font-size: 2.2rem; /* Slightly larger heading */
+                margin-bottom: 30px;
+                color: #333;
+            }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .articles-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .article-item {
+            width: 320px; /* Slightly wider articles */
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .article-item:hover {
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            }
+
+            .article-item img {
+                width: 100%;
+                height: 200px; /* Slightly taller to match bigger design */
+                object-fit: cover;
+                border-radius: 10px;
+                margin-bottom: 15px;
+            }
+
+        .article-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .article-excerpt {
+            font-size: 1.1rem; /* Slightly larger text */
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 8px 14px;
+            background: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .read-more:hover {
+                background-color: #0056b3;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
+
+        @@media (max-width: 768px) {
+            .hero-section
+
+        {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .article-item {
+            width: 100%;
+        }
+
+        }
+    </style>
+}
+
+<div class="container">
+    <div class="hero-section">
+        <div class="hero-image">
+            @if (!string.IsNullOrEmpty(Model.User?.ProfileImageUrl))
+            {
+                <img src="@Model.User.ProfileImageUrl" alt="Profile Image">
+            }
+            else
+            {
+                <img src="/images/default-user.png" alt="Profile Image">
+            }
+        </div>
+        <div class="hero-info">
+            <h1>@(Model.User?.FirstName) @(Model.User?.LastName)</h1>
+            <p><strong>Job Title:</strong> @Model.User?.JobTitle</p>
+            <p><strong>Specialty:</strong> @Model.User?.Specialty</p>
+            <p><strong>Scientific Facts:</strong> @Model.User?.ScientificFacts</p>
+            <p><strong>Email:</strong> @Model.User?.Email</p>
+            @if (!string.IsNullOrEmpty(Model.User?.Email))
+            {
+                <a href="mailto:@Model.User.Email" class="send-email-button">Contact Me</a>
+            }
+        </div>
+    </div>
+
+    @if (Model.LatestArticles != null && Model.LatestArticles.Any())
+    {
+        <div class="latest-articles-section">
+            <h2>Recent Articles</h2>
+            <div class="glass-box">
+                <div class="articles-list">
+                    @foreach (var article in Model.LatestArticles)
+                    {
+                        <div class="article-item">
+                            @if (!string.IsNullOrEmpty(article.FilePath))
+                            {
+                                <img src="@article.FilePath" alt="@article.Title">
+                            }
+                            else
+                            {
+                                <img src="https://www.contentviewspro.com/wp-content/uploads/2017/07/default_image.png" alt="@article.Title">
+                            }
+
+                            <div class="article-title">@article.Title</div>
+                            <div class="article-excerpt">
+                                @Html.Raw(article.Description != null && article.Description.Length > 100
+                                         ? article.Description.Substring(0, 100) + "..."
+                                         : article.Description ?? "No Description")
+                            </div>
+                            <a href="@Url.Action("Details", "SiteArticles", new { id = article.Id })" class="read-more">Read More</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Subject>
+
+@{
+    ViewData["Title"] = "Subjects";
+}
+
+@section Styles {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #eef2f3, #8e9eab);
+            color: #333;
+        }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        .subjects-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .subjects-header h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+                color: #333;
+            }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .subject-card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+        .subject-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subject-info p {
+            margin: 5px 0;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .lesson-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 12px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .lesson-link:hover {
+                background: #0056b3;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+    </style>
+}
+<div class="glass-box">
+<div class="container">
+    <div class="subjects-header">
+        <h1>Subjects</h1>
+    </div>
+
+    @foreach (var subject in Model)
+    {
+        <div class="subject-card">
+            <div class="subject-name">@subject.Name</div>
+            <div class="subject-info">
+                <p><strong>Hours:</strong> @subject.Hours</p>
+                <p><strong>Credits:</strong> @subject.Credits</p>
+                @if (!string.IsNullOrEmpty(subject.MaterialsLink))
+                {
+                    <a href="@subject.MaterialsLink" class="lesson-link" target="_blank">Lesson Materials</a>
+                }
+            </div>
+        </div>
+    }
+</div>
+</div>

@@ -1,0 +1,154 @@
+﻿@model IList<DownloadFiles>
+
+@{
+    ViewData["Title"] = "Files";
+}
+
+@section Styles {
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #eef2f3, #8e9eab);
+            color: #333;
+        }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .search-input:focus {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                outline: none;
+                border-color: #007bff;
+            }
+
+        .file-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+            .file-item:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+        .file-name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .download-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .download-button:hover {
+                background: #0056b3;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .download-button i {
+                font-size: 1.2rem;
+            }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+}
+<div class="glass-box">
+<div class="container">
+    <h1 class="text-center">Downloadable Files</h1>
+
+    <div class="search-bar">
+        <input type="text"
+               id="searchInput"
+               class="search-input"
+               placeholder="Search files..."
+               onkeyup="filterFiles()" />
+    </div>
+
+    <div class="file-list" id="fileList">
+        @foreach (var item in Model)
+        {
+            <div class="file-item">
+                <span class="file-name">@item.Name</span>
+                <a href="@item.FilePath" class="download-button" download>
+                    <i class="fas fa-download"></i>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        function filterFiles() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const fileList = document.getElementById("fileList");
+            const files = fileList.getElementsByClassName("file-item");
+
+            Array.from(files).forEach((file) => {
+                const fileName = file.getElementsByClassName("file-name")[0].textContent.toLowerCase();
+                if (fileName.includes(searchInput)) {
+                    file.classList.remove("hidden");
+                } else {
+                    file.classList.add("hidden");
+                }
+            });
+        }
+    </script>
+}

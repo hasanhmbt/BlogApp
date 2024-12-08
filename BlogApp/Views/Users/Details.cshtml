@@ -1,0 +1,34 @@
+﻿@model User
+
+@{
+    Layout = "_DashboardLayout";
+    ViewBag.Title = "User Details";
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h1 class="m-0 font-weight-bold text-primary">@Model.FirstName @Model.LastName</h1>
+        </div>
+        <div class="card-body">
+            <div class="text-center mb-4">
+                @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+                {
+                    <img src="@Model.ProfileImageUrl" alt="@Model.FirstName" class="img-thumbnail rounded-circle" style="width:150px; height:150px; object-fit:cover;" />
+                }
+                else
+                {
+                    <img src="/images/default-user.png" alt="Default User" class="img-thumbnail rounded-circle" style="width:150px; height:150px; object-fit:cover;" />
+                }
+            </div>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Job Title:</strong> @Model.JobTitle</p>
+            <p><strong>Specialty:</strong> @Model.Specialty</p>
+            <p><strong>Scientific Facts:</strong> @Model.ScientificFacts</p>
+            <div class="mt-4">
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit Profile</a>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

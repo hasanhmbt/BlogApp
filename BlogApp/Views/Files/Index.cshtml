@@ -1,0 +1,110 @@
+﻿@model IEnumerable<DownloadFiles>
+
+@{
+    Layout = "_DashboardLayout";
+    ViewBag.Title = "Files";
+    var currentPage = ViewBag.CurrentPage ?? 1;
+    var totalPages = ViewBag.TotalPages ?? 1;
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Files</h6>
+            <a asp-action="Upload" class="btn btn-primary">Upload New File</a>
+        </div>
+
+        <div class="card-body">
+            <!-- Search Input -->
+            <div class="form-inline mb-3">
+                <input type="text" id="searchInput" placeholder="Search by file name" class="form-control mr-2">
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="filesTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th>File Type</th>
+                            <th>Upload Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var file in Model)
+                        {
+                            <tr>
+                                <td>@file.Name</td>
+                                <td>@file.FileType</td>
+                                <td>@file.UploadDate.ToString("MM/dd/yyyy")</td>
+                                <td class="text-center">
+                                    <a href="@file.FilePath" class="btn btn-sm btn-info" download>
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                    <form asp-action="Delete" method="post" style="display:inline;">
+                                        <input type="hidden" name="id" value="@file.Id" />
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this file?');">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- Pagination Controls -->
+                <nav>
+                    <ul class="pagination">
+                        @if (currentPage > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link"
+                                   asp-action="Index"
+                                   asp-route-pageNumber="@(currentPage - 1)">Previous</a>
+                            </li>
+                        }
+                        @for (var i = 1; i <= totalPages; i++)
+                        {
+                            <li class="page-item @(i == currentPage ? "active" : "")">
+                                <a class="page-link"
+                                   asp-action="Index"
+                                   asp-route-pageNumber="@i">@i</a>
+                            </li>
+                        }
+                        @if (currentPage < totalPages)
+                        {
+                            <li class="page-item">
+                                <a class="page-link"
+                                   asp-action="Index"
+                                   asp-route-pageNumber="@(currentPage + 1)">Next</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js {
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            var searchValue = this.value.toLowerCase();
+            var table = document.getElementById('filesTable');
+            var rows = table.getElementsByTagName('tr');
+
+            for (var i = 1; i < rows.length; i++) {
+                var nameCell = rows[i].getElementsByTagName('td')[0];
+                if (nameCell) {
+                    var nameText = nameCell.textContent || nameCell.innerText;
+                    if (nameText.toLowerCase().indexOf(searchValue) > -1) {
+                        rows[i].style.display = '';
+                    } else {
+                        rows[i].style.display = 'none';
+                    }
+                }
+            }
+        });
+    </script>
+}

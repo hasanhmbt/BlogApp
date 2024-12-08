@@ -1,0 +1,56 @@
+﻿@model Article
+
+@{
+    Layout = "_DashboardLayout";
+    ViewBag.Title = "Edit Article";
+}
+
+<div class="container">
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PublicationDate"></label>
+            <input asp-for="PublicationDate" type="date" class="form-control" />
+            <span asp-validation-for="PublicationDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Current Image</label>
+            @if (!string.IsNullOrEmpty(Model.FilePath))
+            {
+                <div>
+                    <img src="@Model.FilePath" alt="@Model.Title" class="img-fluid" style="max-width: 200px;" />
+                </div>
+            }
+            else
+            {
+                <p>No image uploaded.</p>
+            }
+        </div>
+
+        <div class="form-group">
+            <label>Upload New Image</label>
+            <input type="file" name="ImageFile" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save Changes" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+@section js {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -1,0 +1,130 @@
+﻿@model Article
+
+@{
+    ViewData["Title"] = @Model.Title;
+}
+
+@section Styles {
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #eef2f3, #8e9eab);
+            color: #333;
+        }
+
+        /* Remove white stripe behind navbar */
+        .navbar {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .article-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .article-image {
+            flex-shrink: 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .article-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .article-details {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .article-publisher {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .article-date {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .article-content {
+            padding: 20px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        /* Responsive Design */
+       @@media (max-width: 768px) {
+            .article-header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .article-image {
+                width: 100%;
+                height: auto;
+            }
+
+            .article-details {
+                padding: 0;
+                text-align: center;
+            }
+
+            .article-title {
+                font-size: 1.8rem;
+            }
+
+            .article-content {
+                padding: 10px;
+            }
+        }
+    </style>
+}
+
+<!-- Article Header -->
+<div class="article-header">
+    <!-- Article Image -->
+    <div class="article-image">
+        @if (!string.IsNullOrEmpty(Model.FilePath))
+        {
+            <img src="@Model.FilePath" alt="Article Image">
+        }
+        else
+        {
+            <img src="/images/default-article.png" alt="Article Image">
+        }
+    </div>
+    <!-- Article Details -->
+    <div class="article-details">
+        <h1 class="article-title">@Model.Title</h1>
+        <p class="article-date">Published on: @Model.PublicationDate.ToString("MMMM dd, yyyy")</p>
+    </div>
+</div>
+
+<!-- Article Content -->
+<div class="article-content">
+    @Html.Raw(Model.Description)
+</div>

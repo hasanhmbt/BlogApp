@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Subjects";
+}
+
+@section Styles {
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #eef2f3, #8e9eab);
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            margin-top: 100px; /* Spacing below navbar */
+            padding: 20px;
+        }
+
+        .subjects-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .subjects-header h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+            }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .subject-card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+        .subject-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subject-info {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .lesson-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 12px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .lesson-link:hover {
+                background: #0056b3;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+    </style>
+}
+
+<div class="container">
+    <div class="subjects-header">
+        <h1>Subjects</h1>
+    </div>
+
+    <!-- Subject Card 1 -->
+    <div class="subject-card">
+        <div class="subject-name">Mathematics</div>
+        <div class="subject-info">
+            <p><strong>Hours:</strong> 60</p>
+            <p><strong>Credits:</strong> 4</p>
+            <a href="/materials/mathematics.pdf" class="lesson-link" target="_blank">Lesson Materials</a>
+        </div>
+    </div>
+
+    <!-- Subject Card 2 -->
+    <div class="subject-card">
+        <div class="subject-name">Physics</div>
+        <div class="subject-info">
+            <p><strong>Hours:</strong> 45</p>
+            <p><strong>Credits:</strong> 3</p>
+            <a href="/materials/physics.pdf" class="lesson-link" target="_blank">Lesson Materials</a>
+        </div>
+    </div>
+
+    <!-- Subject Card 3 -->
+    <div class="subject-card">
+        <div class="subject-name">Chemistry</div>
+        <div class="subject-info">
+            <p><strong>Hours:</strong> 50</p>
+            <p><strong>Credits:</strong> 3</p>
+            <a href="/materials/chemistry.pdf" class="lesson-link" target="_blank">Lesson Materials</a>
+        </div>
+    </div>
+</div>
