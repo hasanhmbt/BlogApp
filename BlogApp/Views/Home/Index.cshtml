@@ -1,5 +1,8 @@
 ﻿@model HomeViewModel
+@{
+    ViewBag.Title = "Home";
 
+}
 @section Styles {
     <style>
         body {
@@ -11,9 +14,9 @@
         }
 
         .container {
-            width: 90%; /* Use a percentage to allow the layout to stretch on larger screens */
-            max-width: 1600px; /* A max-width for extremely large screens */
-            margin: 40px auto; /* Slightly less top margin to bring content closer */
+            width: 90%;  
+            max-width: 1600px;  
+            margin: 40px auto;  
             padding: 20px;
         }
 
@@ -25,11 +28,11 @@
             backdrop-filter: blur(10px);
             border-radius: 10px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 40px; /* More padding to fill space */
+            padding: 40px;  
         }
 
         .hero-image img {
-            width: 220px; /* Slightly larger image */
+            width: 220px;  
             height: 220px;
             border-radius: 50%;
             object-fit: cover;
@@ -42,7 +45,7 @@
         }
 
             .hero-info h1 {
-                font-size: 2.5rem; /* Slightly larger font for hero title */
+                font-size: 2.5rem;  
                 font-weight: bold;
                 margin-bottom: 10px;
                 color: #333;
@@ -52,7 +55,7 @@
                 margin: 5px 0;
                 color: #555;
                 line-height: 1.5;
-                font-size: 1.1rem; /* Slightly larger text */
+                font-size: 1.1rem;  
             }
 
             .hero-info .send-email-button {
@@ -79,7 +82,7 @@
         }
 
             .latest-articles-section h2 {
-                font-size: 2.2rem; /* Slightly larger heading */
+                font-size: 2.2rem;  
                 margin-bottom: 30px;
                 color: #333;
             }
@@ -100,7 +103,7 @@
         }
 
         .article-item {
-            width: 320px; /* Slightly wider articles */
+            width: 320px;  
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 10px;
@@ -115,7 +118,7 @@
 
             .article-item img {
                 width: 100%;
-                height: 200px; /* Slightly taller to match bigger design */
+                height: 200px;  
                 object-fit: cover;
                 border-radius: 10px;
                 margin-bottom: 15px;
@@ -129,7 +132,7 @@
         }
 
         .article-excerpt {
-            font-size: 1.1rem; /* Slightly larger text */
+            font-size: 1.1rem; 
             line-height: 1.6;
             color: #666;
             margin-bottom: 15px;
@@ -181,7 +184,7 @@
             }
             else
             {
-                <img src="/images/default-user.png" alt="Profile Image">
+                <img src="https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1095249842.jpg" alt="Profile Image">
             }
         </div>
         <div class="hero-info">
@@ -190,10 +193,9 @@
             <p><strong>Specialty:</strong> @Model.User?.Specialty</p>
             <p><strong>Scientific Facts:</strong> @Model.User?.ScientificFacts</p>
             <p><strong>Email:</strong> @Model.User?.Email</p>
-            @if (!string.IsNullOrEmpty(Model.User?.Email))
-            {
-                <a href="mailto:@Model.User.Email" class="send-email-button">Contact Me</a>
-            }
+             
+                <a href="mailto:qafarov.electronics@gmail.com" class="send-email-button">Contact Me</a>
+             
         </div>
     </div>
 

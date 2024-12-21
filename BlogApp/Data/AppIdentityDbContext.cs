@@ -21,8 +21,8 @@ namespace StudentEnrollmentSystemMVC.Data
                 Id = adminUserId,
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
-                Email = "admin@example.com",
-                NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                Email = "qafarov.electronics@gmail.com",
+                NormalizedEmail = "QAFAROV.ELECTRONICS@GMAIL.COM",
                 EmailConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString("D")
             };
