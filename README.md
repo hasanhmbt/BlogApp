@@ -58,9 +58,8 @@ Before you begin, ensure you have met the following requirements:
 
 
 
-
 ### Project Structure
-
+```bash
 BlogApp/
 ├── .idea/               # IDE configuration files (if using JetBrains IDEs)
 ├── BlogApp/             # Main project folder containing source code
