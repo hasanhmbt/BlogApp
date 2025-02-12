@@ -55,3 +55,46 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    git clone https://github.com/hasanhmbt/BlogApp.git
    cd BlogApp
+
+Open the Solution:
+
+Open BlogApp.sln in Visual Studio or your preferred IDE.
+
+Restore NuGet Packages:
+
+Visual Studio should automatically restore NuGet packages. If not, go to Tools > NuGet Package Manager > Package Manager Console and run:
+
+powershell
+Copy
+Edit
+Update-Package -reinstall
+Configure the Application:
+
+If your project requires configuration settings (like connection strings), update the appsettings.json or the appropriate configuration file with your local settings.
+
+Build and Run:
+
+Build the solution and run the project. You should be able to access the application via your browser at http://localhost:5000 or the port specified in your configuration.
+
+Usage
+Once the application is running:
+
+Create a New Post: Navigate to the "New Post" section, fill in the details, and submit.
+Edit or Delete: Manage your posts directly through the dashboard.
+Explore: Browse the homepage to read posts and enjoy the responsive design.
+Note: Additional features such as user authentication or commenting may be implemented in future updates.
+
+Project Structure
+graphql
+Copy
+Edit
+BlogApp/
+├── .idea/               # IDE configuration files (if using JetBrains IDEs)
+├── BlogApp/             # Main project folder containing source code
+│   ├── Controllers/     # Controllers for handling requests
+│   ├── Models/          # Data models
+│   ├── Views/           # HTML/CSS/JS files for the UI
+│   └── wwwroot/         # Static files (CSS, JS, images)
+├── BlogApp.sln          # Visual Studio solution file
+├── .gitignore           # Git ignore rules
+└── .gitattributes       # Git attributes
