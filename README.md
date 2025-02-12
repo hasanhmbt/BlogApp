@@ -12,9 +12,7 @@ BlogApp is a simple, modern blog application built using C# and web technologies
   - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+
 
 ## Overview
 
